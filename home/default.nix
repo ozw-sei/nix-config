@@ -17,7 +17,7 @@ in
     claude-code
     codex
     delta
-    emacs
+    emacs-nox
     eza
     fd
     fzf
@@ -31,6 +31,7 @@ in
     jujutsu
     nil
     nixfmt-rfc-style
+    ncurses
     pyright
     python3
     ripgrep
@@ -49,6 +50,7 @@ in
   home.sessionVariables = {
     EDITOR = "vim";
     PAGER = "less";
+    TERMINFO_DIRS = "${pkgs.ncurses}/share/terminfo:${pkgs.kitty.terminfo}/share/terminfo:${pkgs.wezterm.terminfo}/share/terminfo:/usr/share/terminfo";
   };
 
   programs.home-manager.enable = true;
@@ -88,6 +90,10 @@ in
     };
 
     initContent = ''
+      if [[ -o interactive ]] && ! infocmp "$TERM" >/dev/null 2>&1; then
+        export TERM=xterm-256color
+      fi
+
       eval "$(direnv hook zsh)"
       eval "$(zoxide init zsh)"
     '';
