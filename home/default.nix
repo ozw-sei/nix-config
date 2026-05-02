@@ -22,6 +22,7 @@ in
     fd
     fzf
     gh
+    ghq
     git
     go
     gopls
