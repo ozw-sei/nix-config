@@ -1,4 +1,9 @@
-{ pkgs, username, configurationName, ... }:
+{
+  pkgs,
+  username,
+  configurationName,
+  ...
+}:
 
 let
   direnvNoCheck = pkgs.direnv.overrideAttrs (_: {
@@ -12,11 +17,15 @@ in
   home.stateVersion = "25.11";
 
   home.packages = with pkgs; [
+    argocd
     bat
     bottom
+    buf
     claude-code
     codex
     delta
+    docker-client
+    docker-compose
     emacs-nox
     eza
     fd
@@ -24,26 +33,39 @@ in
     gh
     ghq
     git
-    go
+    go_1_26
     gopls
     golangci-lint
+    google-cloud-sdk
+    grpcurl
     jq
     jujutsu
+    kubectl
+    kubectx
+    kubernetes-helm
+    kustomize
+    lefthook
+    mise
     nil
     nixfmt-rfc-style
     ncurses
+    nodejs_24
+    pnpm
+    protobuf
     pyright
     python3
     ripgrep
     ruff
+    terraform
+    terraform-ls
+    tflint
     tig
     tree
     uv
-    tig
-    ripgrep
     silver-searcher
     vim
     wget
+    yq-go
     zoxide
   ];
 

@@ -1,17 +1,30 @@
-{ pkgs, username, hostname, ... }:
+{
+  pkgs,
+  username,
+  hostname,
+  ...
+}:
 
 {
   nixpkgs.hostPlatform = "aarch64-darwin";
-  nixpkgs.config.allowUnfreePredicate = pkg:
+  nixpkgs.config.allowUnfreePredicate =
+    pkg:
     builtins.elem (pkgs.lib.getName pkg) [
       "claude-code"
+      "terraform"
     ];
 
   nix = {
     enable = true;
     settings = {
-      experimental-features = [ "nix-command" "flakes" ];
-      trusted-users = [ "@admin" username ];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
+      trusted-users = [
+        "@admin"
+        username
+      ];
       warn-dirty = false;
     };
     gc = {
