@@ -7,6 +7,14 @@
 
 {
   nixpkgs.hostPlatform = "aarch64-darwin";
+  nixpkgs.overlays = [
+    (_final: prev: {
+      direnv = prev.direnv.overrideAttrs (_: {
+        doCheck = false;
+        doInstallCheck = false;
+      });
+    })
+  ];
   nixpkgs.config.allowUnfreePredicate =
     pkg:
     builtins.elem (pkgs.lib.getName pkg) [

@@ -8,6 +8,7 @@
 let
   direnvNoCheck = pkgs.direnv.overrideAttrs (_: {
     doCheck = false;
+    doInstallCheck = false;
   });
 in
 
@@ -75,6 +76,8 @@ in
     TERMINFO_DIRS = "${pkgs.ncurses}/share/terminfo:${pkgs.kitty.terminfo}/share/terminfo:${pkgs.wezterm.terminfo}/share/terminfo:/usr/share/terminfo";
   };
 
+  home.file.".config/zsh/functions/ghq-fzf-cd".source = ./zsh/functions/ghq-fzf-cd;
+
   programs.home-manager.enable = true;
 
   programs.git = {
@@ -115,6 +118,11 @@ in
       if [[ -o interactive ]] && ! infocmp "$TERM" >/dev/null 2>&1; then
         export TERM=xterm-256color
       fi
+
+      fpath=("$HOME/.config/zsh/functions" "''${fpath[@]}")
+      autoload -Uz ghq-fzf-cd
+      zle -N ghq-fzf-cd
+      bindkey '^[;' ghq-fzf-cd
 
       eval "$(direnv hook zsh)"
       eval "$(zoxide init zsh)"

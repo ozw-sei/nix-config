@@ -57,6 +57,13 @@ sudo mv /etc/zshrc /etc/zshrc.before-nix-darwin
 sudo darwin-rebuild switch --flake .#mac
 ```
 
+Makefile からも実行できます。
+
+```sh
+make build
+make switch
+```
+
 Home Manager 側の zsh エイリアスとして、次も使えます。
 
 ```sh

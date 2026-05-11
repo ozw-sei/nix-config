@@ -1,0 +1,11 @@
+emulate -L zsh
+
+local dir
+dir=$(ghq list --full-path | fzf --prompt='ghq> ' --height=40% --reverse) || {
+  zle redisplay
+  return 0
+}
+
+[[ -n "$dir" ]] || return 0
+builtin cd -- "$dir" || return
+zle reset-prompt
