@@ -111,7 +111,7 @@ in
       grep = "rg";
       ls = "eza --icons=auto";
       ll = "eza -lah --icons=auto --git";
-      rebuild = "sudo darwin-rebuild switch --flake ~/Documents/Codex/2026-05-01/mac-nix#${configurationName}";
+      rebuild = "sudo darwin-rebuild switch --flake ~/ghq/github.com/ozw-sei/nix-config#${configurationName}";
     };
 
     initContent = ''
